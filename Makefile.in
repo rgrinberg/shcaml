@@ -81,13 +81,11 @@ all: $(ALL)
 shtop: shcaml.cmo shtop.cmo $(PPLIB)
 	$(OCAMLMKTOP) -o $@ $(LDFLAGS) camlp4o.cma $^
 
-shtop.cmo shtopInit.cmo: INCLUDE =
+shtop.cmo shtopInit.cmo: INCLUDE = -I +compiler-libs
 
 shtopInit.cmo: shtop.cmo
 shtop.cmi: shcaml.cmi
 shtop.cmo: shcaml.cmo shtop.cmi
-
-DIY_TOPLOOP	= -linkall toplevellib.cma
 
 #
 # Building the packed library

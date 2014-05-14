@@ -13,7 +13,7 @@ PA_EXTS = pa_local.cmo \
 	  lineMetadata.cmo pa_linetype.cmo
 
 MLFLAGS	= -syntax camlp4o $(PKGS)
-PKGS    = -package camlp4,camlp4.extend,camlp4.quotations,dynlink,compiler-libs.toplevel
+PKGS    = -package camlp4,camlp4.extend,camlp4.quotations,dynlink
 P4OBJS	= camlp4of.cma
 
 GEN	= lineMetadata.ml
@@ -21,7 +21,7 @@ GEN	= lineMetadata.ml
 default: pa_shcaml.cmo
 
 pp_linespec: linespec.cmo pp_linespec.cmo
-	$(OCAMLC) -o $@ -linkpkg $(PKGS) $(P4OBJS) $^
+	$(OCAMLC) -o $@ -linkpkg $(PKGS),compiler-libs.toplevel $(P4OBJS) $^
 
 pa_shcaml.cmo: $(PA_SHCAML)
 	$(OCAMLC) -pack -o $@ $^

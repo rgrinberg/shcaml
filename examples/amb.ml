@@ -3,7 +3,6 @@
 (* This script demonstrates how Shcaml can be used to implement the AMB
  * operator -- it runs two processes in the background, and when one
  * completes, it kills the other. *)
-Ocaml.use_ocamlc := true;
 Ocaml.packs := [ "shcaml" ]
 --
 

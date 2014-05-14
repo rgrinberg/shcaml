@@ -1,5 +1,4 @@
 #!/usr/bin/env ocamlscript
-Ocaml.use_ocamlc := true;
 Ocaml.packs := [ "shcaml" ]
 --
 
