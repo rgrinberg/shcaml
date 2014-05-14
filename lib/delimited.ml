@@ -37,7 +37,7 @@ LOCAL
         Buffer.add_char buf '"';
         quotation options channel buf
     | '\\' when options.rec_backslash
-             or options.rec_escapes ->
+             || options.rec_escapes ->
         backslash options channel buf;
         start options channel buf (input_char channel)
     | '\r' when options.rec_cr ->
@@ -56,7 +56,7 @@ LOCAL
               failwith "Csv.reader: EOF during quotation" in
     match c with
     | '\\' when options.rec_backslash
-             or options.rec_escapes ->
+             || options.rec_escapes ->
         backslash options channel buf;
         quotation options channel buf
     | '"' ->
@@ -190,7 +190,7 @@ let splitter ?(options = default_options) record =
         done;
         quotation n fields (i + 1)
     | '\\' when options.rec_escapes
-             or options.rec_backslash ->
+             || options.rec_backslash ->
         for j = mark to i - 1 do
           Buffer.add_char buf record.[j]
         done;
@@ -217,7 +217,7 @@ let splitter ?(options = default_options) record =
       | '"' ->
           continue n fields (i + 1) (i + 1)
       | '\\' when options.rec_escapes
-               or options.rec_backslash ->
+               || options.rec_backslash ->
           let c, next = backslash i in
           Buffer.add_char buf c;
           quotation n fields (i + next)
@@ -256,7 +256,7 @@ LOCAL
             | '\r' when options.rec_cr ->
                 raise Exit
             | c when c = options.field_sep
-                  or c = options.record_sep ->
+                  || c = options.record_sep ->
                 raise Exit
             | _ -> ()
           done;
@@ -274,7 +274,7 @@ LOCAL
       | '"' when options.rec_double_double ->
           output_string channel "\"\""
       | '"'|'\\' as c when options.rec_backslash
-                        or options.rec_escapes ->
+                        || options.rec_escapes ->
           output_char channel '\\';
           output_char channel c;
       | '"' ->
@@ -289,7 +289,7 @@ LOCAL
    * or without backslashes when we hit either the end of the field
    * or non-space characters. *)
   let flush_backslash field channel mark i limit plus =
-    if mark = 0 or i = limit then
+    if mark = 0 || i = limit then
       for j = mark to i - 1 do
         output_char channel '\\';
         output_char channel field.[j]
@@ -309,7 +309,7 @@ LOCAL
     else begin
       match field.[i] with
       | c when c = options.field_sep
-            or c = options.record_sep ->
+            || c = options.record_sep ->
           flush_backslash field channel mark i limit 1;
           backslash options field channel (i + 1) (i + 1) limit
       | '"' when options.rec_quotation ->
@@ -319,7 +319,7 @@ LOCAL
           flush_backslash field channel mark i limit 1;
           backslash options field channel (i + 1) (i + 1) limit
       | '\r' when options.rec_cr ->
-          if i + 1 >= limit or field.[i] <> options.record_sep then
+          if i + 1 >= limit || field.[i] <> options.record_sep then
             failwith "Csv.output_field: got CR without LF"
           else begin
             flush_backslash field channel mark i limit 2;
@@ -344,7 +344,7 @@ LOCAL
       | '\000'..'\032' | '\128'..'\255' as c ->
           Some (Printf.sprintf "\\x%02x" (int_of_char c))
       | c when c = options.record_sep
-            or c = options.field_sep ->
+            || c = options.field_sep ->
           Some (Printf.sprintf "\\x%02x" (int_of_char c))
       | _    -> None in
       match str with
@@ -363,7 +363,7 @@ IN
         backslash options field channel 0 0 limit
       else 
         failwith "Csv.output_field: options provide insufficient quoting"
-    else if options.rec_backslash or
+    else if options.rec_backslash ||
             options.rec_escapes then
       backslash options field channel 0 0 limit
     else

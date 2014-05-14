@@ -142,7 +142,7 @@ module Make(H : Hashtbl.HashedType) = struct
   let maybe_resize_helper h =
     let used = count h in
     let size = Array.length h.keys in
-    if 4 * used < size or 4 * size < used
+    if 4 * used < size || 4 * size < used
       then resize ~size:used h
 
   let tick_helper h =

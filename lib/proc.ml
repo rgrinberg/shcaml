@@ -136,7 +136,7 @@ let is_child proc    = proc.child
 let pid_of_proc proc = proc.pid
 
 let wait_any procs =
-    if procs = [] or List.exists (not % is_child) procs
+    if procs = [] || List.exists (not % is_child) procs
       then raise Not_child;
     let old_mask = Unix.sigprocmask Unix.SIG_BLOCK [Sys.sigchld] in
     unwind_protect
