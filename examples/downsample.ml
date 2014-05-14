@@ -3,6 +3,11 @@
 #use "topfind";;
 #require "shcaml";;
 
+open Shcaml;;
+open UsrBin;;
+open Fitting;;
+open Util;;
+
 (** This is a quick one-shot to downsample all the mp3s in the current
     directory into a subdirectory called lofi/.  I actually do this
     all the time for audiobooks I'm going to listen to on my phone,
@@ -15,8 +20,8 @@
 
 let main () =
   let files = 
-    run_source (command "ls" |-
-                grep (Readers.ends_with ".mp3" % Line.show)) in
+    run_source (command "ls" -|
+                grep (Reader.ends_with ".mp3" % Line.show)) in
     mkpath "lofi";
     Shtream.iter (fun l -> 
                     let name = "'" ^ Line.show l ^ "'" in
@@ -26,3 +31,4 @@ let main () =
 
 in
   main ()
+;;

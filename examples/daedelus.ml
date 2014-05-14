@@ -3,7 +3,11 @@
 #use "topfind";;
 #require "shcaml";;
 
-open Proc
+open Shcaml;;
+open UsrBin;;
+open Proc;;
+open Fitting;;
+open Util;;
 
 let isn't_running prog = 
   Shtream.is_empty ^$

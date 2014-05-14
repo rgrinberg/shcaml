@@ -5,6 +5,8 @@
 #use "topfind";;
 #require "shcaml";;
 
+open Shcaml;;
+
 let args = Flags.go ~usage:"-n NPROCS COMMAND ARGS..."
                     "-n <nprocs:int>";;
 let n    = args # int "-n";;

@@ -4,7 +4,7 @@
 AC_INIT(shtop.mli)
 
 # Packages we depend on
-PACKAGES="camlp4 unix pcre dynlink"
+PACKAGES="camlp4 unix pcre dynlink compiler-libs.toplevel"
 
 # Our version number
 VERSION="0.1.3"

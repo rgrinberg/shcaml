@@ -5,6 +5,11 @@
 #use "topfind";;
 #require "shcaml";;
 
+open Shcaml
+open UsrBin
+open Fitting
+open Util
+
 let pgrep pat = ignore ^$ run begin
   ps () -|
   grep (Reader.starts_with pat % Line.Ps.command) -|

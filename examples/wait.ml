@@ -1,8 +1,10 @@
 #! /usr/bin/env ocamlscript
+Ocaml.use_ocamlc := true;
 Ocaml.packs := [ "shcaml" ]
 --
 
 open Shcaml
+open UsrBin
 open Fitting
 
 let echo s = program "echo" [s];;

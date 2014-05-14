@@ -3,7 +3,10 @@
 #use "topfind";;
 #require "shcaml";;
 
+open Shcaml
+open UsrBin
 open Channel
+open Channel.Dup
 open Shtream
 open Util
 

@@ -3,6 +3,10 @@
 #use "topfind";;
 #require "shcaml";;
 
+open Shcaml;;
+open UsrBin;;
+open Fitting;;
+
 let usage  = "[-s SECONDS] [COMMAND ARGS...]"
 let lookup = Flags.go ~usage "-s <SECONDS:int>"
 let delay  = lookup # int ~default:1 "-s"

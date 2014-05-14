@@ -3,6 +3,7 @@
 #use "topfind";;
 #require "shcaml";;
 
+open Shcaml;;
 open Printf;;
 
 let lookup = Flags.go "-a --bee -c <Cat> --dog=<Dog:int>" in
