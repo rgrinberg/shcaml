@@ -28,3 +28,4 @@ doc/man
 *.cmx
 *.doc
 *.doci
+_build
