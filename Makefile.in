@@ -2,7 +2,7 @@
 
 OCAMLFIND	= ocamlfind
 OCAMLLEX        = ocamllex
-CPP		= cpp
+CPP		= cppo -n
 OCAMLC		= $(OCAMLFIND) ocamlc
 OCAMLOPT	= $(OCAMLFIND) ocamlopt
 OCAMLMKTOP	= $(OCAMLFIND) ocamlmktop
