@@ -1,8 +1,8 @@
 # Makefile for CamlShcaml
 
-OCAMLFIND	= @OCAMLFIND@
-OCAMLLEX        = @OCAMLLEX@
-CPP		= @CPP@
+OCAMLFIND	= ocamlfind
+OCAMLLEX        = ocamllex
+CPP		= cpp
 OCAMLC		= $(OCAMLFIND) ocamlc
 OCAMLOPT	= $(OCAMLFIND) ocamlopt
 OCAMLMKTOP	= $(OCAMLFIND) ocamlmktop

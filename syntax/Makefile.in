@@ -1,6 +1,6 @@
 # Makefile for CamlShcaml syntax
 
-OCAMLFIND	= @OCAMLFIND@
+OCAMLFIND	= ocamlfind
 OCAMLC		= $(OCAMLFIND) ocamlc
 
 PA_SHCAML = pa_thunk.cmo \
