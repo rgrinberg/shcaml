@@ -29,3 +29,6 @@ doc/man
 *.doc
 *.doci
 _build
+*.byte
+*.native
+autom4te.cache
