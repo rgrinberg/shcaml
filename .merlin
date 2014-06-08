@@ -1,0 +1,6 @@
+PRJ shcaml
+S lib
+S syntax
+B _build
+B _build/lib
+B _build/syntax
