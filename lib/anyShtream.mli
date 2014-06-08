@@ -1,4 +1,3 @@
-(* vim: set ft=ocaml : *)
 (**
  * Functor to create type-aware shtream modules.  The base shtream
  * module {!Shtream} is indifferent to the element type.  The functor
@@ -10,9 +9,6 @@
  * this functor, though some values in {!LineShtream} are specialized
  * further.
  *)
-
-(** The input signature of the functor {!AnyShtream.Make}. *)
-module type ELEM = S.Elem
 
 (** The output signature of the functor {!AnyShtream.Make}.
  * The shtream and coshtream types in the resulting module are
@@ -32,8 +28,9 @@ module type ELEM = S.Elem
  * This signature is equivalent to {!Fitting.SHTREAM},
  * the input signature of the functor {!Fitting.Make}.
  *)
-module type ANYSHTREAM = S.AnyShtream
 
 (** Build a new shtream module.  The {!ELEM}
  * parameter specifies how to read and print shtream elements. *)
-module Make(E : ELEM) : ANYSHTREAM with module Elem = E
+module Make(E : S.Elem) : S.AnyShtream with module Elem = E
+                                        and type 'a t = 'a Shtream.t
+                                        and type 'a co_t = 'a Shtream.co_t

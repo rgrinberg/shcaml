@@ -21,7 +21,7 @@
  * may also be found in {!Shtream.COMMON}.
  *)
 
-include S.Shtream
+include module type of Shtream_intf
 
 (** {2 Reading and Writing Shtreams} *)
 

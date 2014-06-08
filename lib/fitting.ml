@@ -3,11 +3,7 @@ open Util
 open Channel
 open Channel.Dup
 
-module type SHTREAM = AnyShtream.ANYSHTREAM
-
-module type FITTING = S.Fitting
-
-module Make(Shtream : SHTREAM) = struct
+module Make(Shtream : S.AnyShtream) = struct
   type initial      = Shtream.initial
   type 'a elem      = 'a Shtream.elem
   type 'a shtream   = 'a Shtream.t

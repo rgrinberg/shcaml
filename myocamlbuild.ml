@@ -7,16 +7,6 @@ let pp_linespec = Filename.concat (Sys.getcwd ()) "pp_linespec.byte"
 (* not sure why I have to fucking do this... *)
 let camlp4 = (Findlib.query "camlp4").Findlib.location
 
-let () = rule "cppo" ~dep:"%.ml.cpp" ~prod:"%.ml" begin fun env _build ->
-  Cmd (S[
-    A "cppo"; 
-    S [A "-I"; P (Filename.concat root_dir "lib")];
-    A "-n";
-    S [A "-o"; P (env "%.ml");];
-    P (env "%.ml.cpp");
-  ])
-end
-
 let () =
   rule "linespec: lineMetadata special rule ffs"
     ~deps:["lib/line.ls"; "syntax/pp_linespec.byte"]

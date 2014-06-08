@@ -1,9 +1,7 @@
 (* vim: set ft=ocaml : *)
 open Util
 
-module type ANYSHTREAM = S.AnyShtream
-
-module Make (E : S.ELEM) = struct
+module Make (E : S.Elem) = struct
   include Shtream
 
   module Elem = E

@@ -15,13 +15,14 @@
 type sourced = <Line| seq: Line.present; source: Line.present >
 
 (** The parameter given to {!AnyShtream.Make} to build this module. *)
-module LineElem : S.ELEM
-  with type 'a elem = 'a Line.t
-   and type initial = sourced
+module LineElem : S.Elem with type 'a elem = 'a Line.t
+                          and type initial = sourced
 
 (** Most of the types and values in {!LineShtream} come from the
  * result of apply {!AnyShtream.Make}. *)
-include AnyShtream.ANYSHTREAM with module Elem = LineElem
+include S.AnyShtream with module Elem = LineElem
+                      and type 'a t = 'a Shtream.t
+                      and type 'a co_t = 'a Shtream.co_t
 
 (** Construct a {!Line.t} reader from a record reader.  This is like
  * {!AnyShtream.ANYSHTREAM.elem_reader}, but allows specifying a
