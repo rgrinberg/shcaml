@@ -4,3 +4,8 @@
 <lib/*.ml{i,}>: syntax(camlp4o), define(syntax/pa_internal.cma), package(camlp4.quotations)
 <syntax/*linespec*>: use_camlp4of, package(compiler-libs.toplevel)
 <syntax/**>: package(camlp4,camlp4.extend,camlp4.quotations,dynlink)
+
+true: cppo_n
+<lib/anyShtream.*>: cppo_I(lib/anyShtream.sig)
+<lib/fitting.*>: cppo_I(lib/fitting.sig)
+<lib/shtream.*>: cppo_I(lib/shtream.sig)

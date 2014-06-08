@@ -41,11 +41,13 @@ let () =
       Seq [cmd "-impl" "%.ml"; cmd "-intf" "%.mli"]
     end
 
-let () = 
-  dispatch begin function 
-  | After_rules ->
-    ocaml_lib ~extern:true ~dir:camlp4 "camlp4of";
-    pflag ["ocaml";"compile";] "define" (fun s -> S [A"-ppopt"; A (s)]);
-    pflag ["ocaml";"ocamldep";] "define" (fun s -> S [A"-ppopt"; A (s)])
-  | _ -> ()
+let () =
+  dispatch begin fun hook ->
+    Ocamlbuild_cppo.dispatcher hook ;
+    match hook with
+      | After_rules ->
+          ocaml_lib ~extern:true ~dir:camlp4 "camlp4of";
+          pflag ["ocaml";"compile";] "define" (fun s -> S [A"-ppopt"; A (s)]);
+          pflag ["ocaml";"ocamldep";] "define" (fun s -> S [A"-ppopt"; A (s)])
+      | _ -> ()
   end
