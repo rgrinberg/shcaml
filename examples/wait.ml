@@ -1,14 +1,10 @@
-#! /usr/bin/env ocamlscript
-Ocaml.packs := [ "shcaml" ]
---
-
 open Shcaml
 open UsrBin
 open Fitting
 
 let echo s = program "echo" [s];;
 
-run begin
+let _ = run begin
   ( command "sleep 1"   ^>>
     echo "b"            ^>>
     command "sleep 1" ) ^&= function proc ->

@@ -1,11 +1,3 @@
-#!/usr/bin/env ocamlscript
-
-(* This script demonstrates how Shcaml can be used to implement the AMB
- * operator -- it runs two processes in the background, and when one
- * completes, it kills the other. *)
-Ocaml.packs := [ "shcaml" ]
---
-
 open Shcaml
 open Fitting
 open Util
@@ -33,5 +25,5 @@ let two_sleeps () = run begin
   yield (Proc.WEXITED 0)
 end
 
-if not !Sys.interactive then
+let () = if not !Sys.interactive then
   main ((Flags.go "") # strings "")

@@ -1,10 +1,3 @@
-#!/usr/bin/env ocaml
-
-(* Quick reimplementation of pgrep(1). *)
-
-#use "topfind";;
-#require "shcaml";;
-
 open Shcaml
 open UsrBin
 open Fitting
@@ -17,7 +10,7 @@ let pgrep pat = ignore ^$ run begin
 end
 
 ;;
-if Array.length Sys.argv > 1 then
-  pgrep Sys.argv.(1)
-else
-  Printf.eprintf "Usage: %s PROGRAM\n"  Sys.argv.(0)
+let _ = if Array.length Sys.argv > 1 then
+    pgrep Sys.argv.(1)
+  else
+    Printf.eprintf "Usage: %s PROGRAM\n"  Sys.argv.(0)
