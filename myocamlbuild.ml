@@ -7,15 +7,15 @@ let pp_linespec = Filename.concat (Sys.getcwd ()) "pp_linespec.byte"
 (* not sure why I have to fucking do this... *)
 let camlp4 = (Findlib.query "camlp4").Findlib.location
 
-let () = rule "cppo" ~dep:"%.ml.cpp" ~prod:"%.ml" begin fun env _build ->
-  Cmd (S[
-    A "cppo"; 
-    S [A "-I"; P (Filename.concat root_dir "lib")];
-    A "-n";
-    S [A "-o"; P (env "%.ml");];
-    P (env "%.ml.cpp");
-  ])
-end
+
+(** All signature files. *)
+let signatures =
+  ["lib/anyShtream.sig" ; "lib/fitting.sig" ; "lib/shtream.sig" ]
+
+(** File processed by cppo depends on signature. *)
+(* A bit overkill, but good enough. *)
+let () = dep ["cppo"] signatures
+
 
 let () =
   rule "linespec: lineMetadata special rule ffs"
@@ -51,11 +51,13 @@ let () =
       Seq [cmd "-impl" "%.ml"; cmd "-intf" "%.mli"]
     end
 
-let () = 
-  dispatch begin function 
-  | After_rules ->
-    ocaml_lib ~extern:true ~dir:camlp4 "camlp4of";
-    pflag ["ocaml";"compile";] "define" (fun s -> S [A"-ppopt"; A (s)]);
-    pflag ["ocaml";"ocamldep";] "define" (fun s -> S [A"-ppopt"; A (s)])
-  | _ -> ()
+let () =
+  dispatch begin fun hook ->
+    Ocamlbuild_cppo.dispatcher hook ;
+    match hook with
+      | After_rules ->
+          ocaml_lib ~extern:true ~dir:camlp4 "camlp4of";
+          pflag ["ocaml";"compile";] "define" (fun s -> S [A"-ppopt"; A (s)]);
+          pflag ["ocaml";"ocamldep";] "define" (fun s -> S [A"-ppopt"; A (s)])
+      | _ -> ()
   end
