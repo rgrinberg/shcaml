@@ -7,16 +7,6 @@ let pp_linespec = Filename.concat (Sys.getcwd ()) "pp_linespec.byte"
 (* not sure why I have to fucking do this... *)
 let camlp4 = (Findlib.query "camlp4").Findlib.location
 
-
-(** All signature files. *)
-let signatures =
-  ["lib/anyShtream.sig" ; "lib/fitting.sig" ; "lib/shtream.sig" ]
-
-(** File processed by cppo depends on signature. *)
-(* A bit overkill, but good enough. *)
-let () = dep ["cppo"] signatures
-
-
 let () =
   rule "linespec: lineMetadata special rule ffs"
     ~deps:["lib/line.ls"; "syntax/pp_linespec.byte"]
