@@ -5,14 +5,7 @@ open Channel.Dup
 
 module type SHTREAM = AnyShtream.ANYSHTREAM
 
-module type FITTING = sig
-  type 'a t constraint 'a = 'b -> 'c
-  type initial
-  type 'a shtream
-  type 'a coshtream
-  type 'a elem
-  #include "fitting.sig"
-end
+module type FITTING = S.Fitting
 
 module Make(Shtream : SHTREAM) = struct
   type initial      = Shtream.initial

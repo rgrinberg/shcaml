@@ -40,8 +40,11 @@ type 'a shtream   = 'a LineShtream.t
 type 'a coshtream = 'a LineShtream.co_t
 (** Alias for {!LineShtream.co_t} *)
 
-#include "fitting.sig"
-
+include S.Fitting with type 'a shtream = 'a LineShtream.t
+                   and 'a shtream = 'a LineStream.co_t
+                   and 'a elem = 'a LineShtream.elem
+                   and initial = LineShtream.initial
+ 
 (** {2 Functorial Interface} *)
 
 (** The input signature of the functor {!Fitting.Make}.
@@ -51,38 +54,7 @@ type 'a coshtream = 'a LineShtream.co_t
  * *)
 module type SHTREAM = AnyShtream.ANYSHTREAM
 
-(** The output signature of the functor {!Fitting.Make}. *)
-module type FITTING = sig
-  (** {3 Types} *)
-
-  (** A fitting that consumes values of type ['a] and produces
-   * values of type ['b].
-   *)
-  type 'a t
-    constraint 'a = 'b -> 'c
-
-  type 'a elem
-  (**
-   * This is the type of elements that fittings know how to write to
-   * external processes.  This type comes from the functor
-   * parameter {!SHTREAM}.
-   *)
-  type initial
-  (** 
-   * This is the parameter to the type {!elem} for specifying
-   * the type of elements that fittings know how to read from
-   * external processes.  That is, fittings constructed from external
-   * processes produce values of type [initial elem].
-   *
-   * This type comes from the functor parameter {!SHTREAM}.
-   *)
-  type 'a shtream
-  (** Alias for {!Shtream.t} *)
-  type 'a coshtream
-  (** Alias for {!Shtream.co_t} *)
-
-  #include "fitting.sig"
-end
+module type FITTING = S.Fitting
 
 (** Build a new fittings module.  The {!SHTREAM} parameter specifies the
  * underlying shtream implementation to use. *)
