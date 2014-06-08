@@ -386,11 +386,3 @@ let annihilate shtream coshtream =
     try sigpipe_protect {| iter (unsafe_conext coshtream) shtream; |}
     with CoFailure -> ()
   end
-
-module type COMMON = sig
-  exception Failure
-  type 'a t
-  exception CoFailure
-  type 'a co_t
-  #include "shtream.sig"
-end

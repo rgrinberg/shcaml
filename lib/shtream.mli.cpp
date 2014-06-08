@@ -21,24 +21,7 @@
  * may also be found in {!Shtream.COMMON}.
  *)
 
-(** Raised on attempts to retrieve elements from an empty
- * {!t}.  Callbacks such as the argument to {!from}
- * or {!map} may raise this to indicate the end of the
- * shtream they are producing. *)
-exception Failure
-
-(** A shtream with elements of type ['a] *)
-type 'a t
-
-(** Raised if a coshtream is no longer accepting data.  This could
- * happen, for example, were the shtream-consuming function to
- * return before exhausting the shtream. *)
-exception CoFailure
-
-(** A coshtream accepting elements of type ['a] *)
-type 'a co_t
-
-#include "shtream.sig"
+include S.Shtream
 
 (** {2 Reading and Writing Shtreams} *)
 
@@ -118,20 +101,3 @@ val of_thunk   : ?procref:Channel.procref ->
                  ?dups:Channel.dup_spec ->
                  ?hint:(Reader.raw_line -> 'a) ->
                  (in_channel -> 'a) -> (unit -> unit) -> 'a t
-
-(** The signature for operations common to all shtream modules.
- * This includes the majority of shtream operations.  What remains here
- * in {!Shtream} are functions that do input or output, and thus require
- * reading or writing advice.
- *)
-module type COMMON = sig
-  exception Failure
-  (** Alias for {!Shtream.Failure} *)
-  type 'a t
-  (** Alias for {!Shtream.t} *)
-  exception CoFailure
-  (** Alias for {!Shtream.CoFailure} *)
-  type 'a co_t
-  (** Alias for {!Shtream.co_t} *)
-  #include "shtream.sig"
-end
