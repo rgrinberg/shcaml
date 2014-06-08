@@ -15,7 +15,7 @@
 type sourced = <Line| seq: Line.present; source: Line.present >
 
 (** The parameter given to {!AnyShtream.Make} to build this module. *)
-module LineElem : AnyShtream.ELEM
+module LineElem : S.ELEM
   with type 'a elem = 'a Line.t
    and type initial = sourced
 

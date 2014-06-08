@@ -8,7 +8,7 @@
  *)
 
 (** The parameter given to {!AnyShtream.Make} to build this module. *)
-module StringElem : AnyShtream.ELEM
+module StringElem : S.ELEM
   with type 'a elem = string
    and type initial = unit
 
