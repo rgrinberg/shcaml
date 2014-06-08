@@ -1,4 +1,4 @@
-<syntax> or <lib>: include
+<syntax> or <lib> or <examples>: include
 <lib/**>: package(pcre)
 <syntax/**>: syntax(camlp4o)
 <lib/*.ml{i,}>: syntax(camlp4o), define(syntax/pa_internal.cma), package(camlp4.quotations)
