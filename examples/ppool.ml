@@ -1,11 +1,6 @@
-#!/usr/bin/env ocaml
-
-(* Keep a given number of processes running simultaneously *)
-
-#use "topfind";;
-#require "shcaml";;
-
-open Shcaml;;
+open Shcaml
+open Util
+open Channel.Dup
 
 let args = Flags.go ~usage:"-n NPROCS COMMAND ARGS..."
                     "-n <nprocs:int>";;

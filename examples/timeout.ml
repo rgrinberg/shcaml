@@ -1,11 +1,6 @@
-#!/usr/bin/env ocaml
-
-#use "topfind";;
-#require "shcaml";;
-
-open Shcaml;;
-open UsrBin;;
-open Fitting;;
+open Shcaml
+open UsrBin
+open Fitting
 
 let usage  = "[-s SECONDS] [COMMAND ARGS...]"
 let lookup = Flags.go ~usage "-s <SECONDS:int>"
@@ -16,8 +11,7 @@ let to_run =
   | prog :: args -> program prog args
   | _            -> command "yes i am going to run forever"
 
-;;
-run begin
+let _ = run begin
   to_run ^&= fun proc ->
     sleep delay;
     Proc.kill ~raise:false Sys.sigint proc;

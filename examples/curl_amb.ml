@@ -1,9 +1,3 @@
-#!/usr/bin/env ocaml
-
-#use "topfind";;
-#camlp4o;;
-#require "shcaml";;
-
 open Shcaml
 open Fitting
 open Channel.Dup

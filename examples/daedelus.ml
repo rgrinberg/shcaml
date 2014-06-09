@@ -1,8 +1,3 @@
-#!/usr/bin/env ocaml
-
-#use "topfind";;
-#require "shcaml";;
-
 open Shcaml;;
 open UsrBin;;
 open Proc;;

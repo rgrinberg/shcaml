@@ -1,11 +1,13 @@
 amb.native
 args.native
-curl-amb.native
+# curl_amb.native
 daedelus.native
 downsample.native
 notify.native
 pgrep.native
-ppool.native
-shmencode.native
+# don't know why doesn't work yet
+# ppool.native
+# needs camlp4
+# shmencode.native
 timeout.native
-wait.native
+# wait.native

@@ -1,7 +1,3 @@
-#!/usr/bin/env ocamlscript
-Ocaml.packs := [ "shcaml" ]
---
-
 open Shcaml
 open Fitting
 open Adaptor
@@ -142,5 +138,4 @@ let main () =
   let discinfo = get_cddb (get_discid ()) in
     DepDAG.run ~n (build_dag discinfo)
 
-;;
-main ()
+let () = main ()
