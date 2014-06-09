@@ -4,6 +4,8 @@ let root_dir = Sys.getcwd ()
 
 let pp_linespec = Filename.concat (Sys.getcwd ()) "pp_linespec.byte"
 
+let () = ocaml_lib ~dir:"shcaml" "lib/shcaml"
+
 (* not sure why I have to fucking do this... *)
 let camlp4 = (Findlib.query "camlp4").Findlib.location
 
